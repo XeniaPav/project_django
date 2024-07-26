@@ -37,8 +37,11 @@ class Command(BaseCommand):
         category_for_create = []
         for category_item in category_list:
             category_for_create.append(
-                Category.objects.create(**category_item)
+                Category(**category_item)
             )
+
+        # Создаем объекты в базе с помощью метода bulk_create()
+        Category.objects.bulk_create(category_for_create)
 
         product_list = []
         # Обходим все значения продуктов из фикстуры для получения информации об одном объекте
@@ -60,12 +63,12 @@ class Command(BaseCommand):
         product_for_create = []
         for product_item in product_list:
             product_for_create.append(
-                Product.objects.create(**product_item)
+                Product(**product_item)
             )
 
         # Создаем объекты в базе с помощью метода bulk_create()
-        Category.objects.bulk_create(category_for_create)
         Product.objects.bulk_create(product_for_create)
 
         # print(product_for_create)
         # print(category_for_create)
+
