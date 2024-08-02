@@ -2,6 +2,9 @@ from django.db import models
 
 
 class Category(models.Model):
+    """
+    Модель категории товаров
+    """
     name = models.CharField(
         max_length=100,
         verbose_name="Название категории",
@@ -23,6 +26,9 @@ class Category(models.Model):
 
 
 class Product(models.Model):
+    """
+    Модель товара
+    """
     name = models.CharField(
         max_length=100,
         verbose_name="Название продукта",
@@ -53,8 +59,8 @@ class Product(models.Model):
     price = models.IntegerField(
         blank=True, null=True, verbose_name="Цена", help_text="Укажите цену товара"
     )
-    created_at = models.DateField(auto_now_add=True)
-    updated_at = models.DateField(auto_now=True)
+    created_at = models.DateField(auto_now_add=True, verbose_name='Дата создания')
+    updated_at = models.DateField(auto_now=True, verbose_name='Дата обновления')
 
     def __str__(self):
         return f"{self.name}"
@@ -65,4 +71,60 @@ class Product(models.Model):
         ordering = (
             "category",
             "name",
+        )
+
+
+class Buyer(models.Model):
+    """
+    Модель неавторизованного пользователя, задавшего вопрос в разделе "Контакты"'
+    """
+    name = models.CharField(max_length=100, verbose_name='Имя')
+    phone = models.CharField(max_length=12, verbose_name='Телефон')
+    message = models.TextField(verbose_name='Сообщение')
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'покупатель'
+        verbose_name_plural = 'покупатели'
+        ordering = ('name',)
+
+class Blog(models.Model):
+    """
+    Модель блога
+    """
+    title = models.CharField(
+        max_length=150,
+        verbose_name="Заголовок статьи",
+    )
+    slug = models.CharField(
+        max_length=150,
+        verbose_name='slug',
+        blank=True,
+        null=True,
+    )
+
+    description = models.TextField(
+        verbose_name="Содержимое",
+        blank=True,
+        null=True,
+    )
+    photo = models.ImageField(
+        upload_to="photo/",
+        blank=True,
+        null=True,
+        verbose_name="Изображение (превью)",
+    )
+    created_at = models.DateField(auto_now_add=True, verbose_name='Дата создания')
+    is_published = models.BooleanField(default=True, verbose_name='Опубликовано')
+    views_count = models.PositiveIntegerField(default=0, verbose_name='Просмотры')
+    def __str__(self):
+        return f"{self.title}"
+
+    class Meta:
+        verbose_name = "публикация"
+        verbose_name_plural = "публикации"
+        ordering = (
+            "title",
         )

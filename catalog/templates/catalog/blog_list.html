@@ -1,0 +1,37 @@
+{% extends 'catalog/base.html' %}
+{% block content %}
+
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h1 class="display-3">Новости</h1>
+    <a class="btn btn-success col-md-8" href="{% url 'catalog:blog_create' %}" role="button">Поделиться новостью</a>
+</div>
+<div class="col-md-12">
+</div>
+<br>
+<div class="container">
+    <div class="row text-center">
+        {% for object in object_list %}
+        <div class="col-md-4">
+            <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">{{object.title}}</h4>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                        <li>{{object.text | truncatechars:50}}</li>
+                    </ul>
+                    <a class="btn btn-primary" href="{% url 'catalog:detail_blog' object.pk %}" role="button">Читать</a>
+                    <a class="btn btn-primary" href="{% url 'catalog:update_blog' object.pk %}" role="button">Обновить</a>
+                    <a class="btn btn-danger" href="{% url 'catalog:delete_blog' object.pk %}" role="button">Удалить</a>
+                </div>
+                {% if object.is_published %}
+                <a class="btn btn-warning" href="{% url 'catalog:toggle_activity' object.pk %}">Снять с публикации</a>
+                {% else %}
+                <a class="btn btn-success" href="{% url 'catalog:toggle_activity' object.pk %}">Опубликовать</a>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

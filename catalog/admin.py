@@ -1,5 +1,5 @@
 from django.contrib import admin
-from catalog.models import Product, Category
+from catalog.models import Product, Category, Blog
 @admin.register(Product)
 class ProductsAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'price', 'category')
