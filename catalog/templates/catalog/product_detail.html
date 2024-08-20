@@ -1,30 +1,27 @@
 {% extends 'catalog/base.html' %}
 {% load my_tags %}
 {% block content %}
-<div class="container">
-    <div class="row text-center">
-        <div class="col-md-4">
-            <div class="card mb-4 box-shadow">
-                <div class="card-header">
-                    <h4 class="my-0 font-weight-normal">{{object}}</h4>
+<div class="album py-5 bg-body-tertiary">
+    <div class="container">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div class="col">
+          <div class="card shadow-sm">
+            <img src="{{ product.photo | media_filter }}">
+            <div class="card-body">
+              <p class="card-text">Название: {{ object.name }}</p>
+              <p class="card-text">Описание: {{ object.description }}</p>
+              <p class="card-text">Категория: {{ object.category }}</p>
+              <p class="card-text">Цена: {{ object.price }} руб.</p>
+              <p class="card-text">Создан: {{ object.created_at }}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a class="btn btn-primary" href="{% url 'catalog:product_list' %}" role="button">Назад</a>
                 </div>
-                <img src ="{{ product.photo | media_filter }}">
-                <div class="card-body">
-                    <ul class="list-unstyled mt-3 mb-4 text-start m-3">
-                        <h3>Цена: {{object.price}}р.</h3>
-                        <li>Категория товара: {{object.category}}</li>
-                        <li>{{object.description}}</li>
-
-                        <li>Дата добавления товара: {{object.created_at}}</li>
-                        <li>Дата актуализации товара: {{object.updated_at}}</li>
-
-
-                    </ul>
-                    <a class="btn btn-primary" href="{% url 'catalog:product_list' %}" role="button">Назад</a>
-                </div>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-
+  </div>
 {% endblock %}

@@ -20,6 +20,7 @@
                     <ul class="list-unstyled mt-3 mb-4 text-start m-3">
                         <li>{{object.text | truncatechars:50}}</li>
                     </ul>
+
                     <a class="btn btn-primary" href="{% url 'catalog:detail_blog' object.pk %}" role="button">Читать</a>
                     <a class="btn btn-primary" href="{% url 'catalog:update_blog' object.pk %}" role="button">Обновить</a>
                     <a class="btn btn-danger" href="{% url 'catalog:delete_blog' object.pk %}" role="button">Удалить</a>

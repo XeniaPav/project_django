@@ -1,7 +1,11 @@
 {% extends 'catalog/base.html' %}
 {% load my_tags %}
 {% block content %}
+
 <div class="container">
+    <div class="col-12 mb-5">
+        <a class="btn btn-outline-primary" href="{% url 'catalog:product_create' %}" role="button">Добавить товар</a>
+    </div>
     <div class="row text-center">
         {% for product in object_list %}
         <div class="col-md-3">
@@ -9,12 +13,22 @@
                 <div class="card-header">
                     <h4 class="my-0 font-weight-normal">{{ product.name | truncatechars:20 }}</h4>
                 </div>
-                <img src ="{{ product.photo | media_filter }}">
+                <img src="{{ product.photo | media_filter }}">
                 <div class="card-body">
                     <ul class="list-unstyled mt-3 mb-4 text-start m-3">
                         <li>{{product.description | truncatechars:100}}</li>
                     </ul>
-                    <a class="btn btn-primary" href="{% url 'catalog:product_detail' product.pk %}" role="button">Купить</a>
+                    <p class="card-text">
+                        {% for version in product.versions.all %}
+                        {% if version.is_version_active %}
+                    <p>Версия: {{version.version_name}} ({{version.version_number}}) </p>
+                    {% endif %}
+                    {% endfor %}
+                    </p>
+                    <a class="btn btn-primary" href="{% url 'catalog:product_detail' product.pk %}"
+                       role="button">Купить</a>
+                    <a class="btn btn-primary" href="{% url 'catalog:product_update' product.pk %}" role="button">Редактировать</a>
+
                 </div>
             </div>
         </div>
