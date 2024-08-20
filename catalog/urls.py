@@ -19,3 +19,4 @@ urlpatterns = [
     path("activity/<int:pk>/", toggle_publish, name="toggle_activity"),
 
 ]
+
