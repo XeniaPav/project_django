@@ -4,7 +4,9 @@
 
 <div class="container">
     <div class="col-12 mb-5">
+        {% if user.is_authenticated %}
         <a class="btn btn-outline-primary" href="{% url 'catalog:product_create' %}" role="button">Добавить товар</a>
+        {% endif %}
     </div>
     <div class="row text-center">
         {% for product in object_list %}
@@ -27,8 +29,9 @@
                     </p>
                     <a class="btn btn-primary" href="{% url 'catalog:product_detail' product.pk %}"
                        role="button">Купить</a>
+                    {% if user.is_authenticated %}
                     <a class="btn btn-primary" href="{% url 'catalog:product_update' product.pk %}" role="button">Редактировать</a>
-
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -37,4 +40,5 @@
 </div>
 
 {% endblock %}
+
 
