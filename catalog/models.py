@@ -73,7 +73,11 @@ class Product(models.Model):
     )
 
     updated_at = models.DateField(auto_now=True, verbose_name='Дата обновления')
-
+    is_published = models.BooleanField(
+        default=False,
+        verbose_name="Опубликовано",
+        help_text="Опубликовать запись",
+    )
     def __str__(self):
         return f"{self.name}"
 
@@ -85,7 +89,11 @@ class Product(models.Model):
             "category",
             "name",
         )
-
+        permissions = [
+            ('can_edit_product_description', 'Can edit product description'),
+            ('can_edit_product_category', 'Can edit product category'),
+            ('can_cancel_publication', 'Can cancel publication of product'),
+        ]
 
 class Buyer(models.Model):
     """

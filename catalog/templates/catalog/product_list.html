@@ -29,7 +29,7 @@
                     </p>
                     <a class="btn btn-primary" href="{% url 'catalog:product_detail' product.pk %}"
                        role="button">Купить</a>
-                    {% if user.is_authenticated %}
+                    {% if perms.catalog.can_edit_product_description and perms.catalog.can_edit_product_category and perms.catalog.can_cancel_publication or user == product.owner %}
                     <a class="btn btn-primary" href="{% url 'catalog:product_update' product.pk %}" role="button">Редактировать</a>
                     {% endif %}
                 </div>
