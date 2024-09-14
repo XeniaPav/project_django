@@ -37,3 +37,4 @@ urlpatterns = [
     path("delete_blog/<int:pk>/", BLogDeleteView.as_view(), name="delete_blog"),
     path("activity/<int:pk>/", toggle_publish, name="toggle_activity"),
 ]
+

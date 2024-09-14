@@ -17,3 +17,4 @@ def get_categories_from_cache():
     categories = Category.objects.all()
     cache.set(key, categories)
     return categories
+
