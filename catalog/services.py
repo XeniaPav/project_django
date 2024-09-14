@@ -18,3 +18,4 @@ def get_categories_from_cache():
     cache.set(key, categories)
     return categories
 
+

@@ -235,3 +235,4 @@ def toggle_publish(request, pk):
     publish_item.save()
     return redirect(reverse("catalog:blog"))
 
+
